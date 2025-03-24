@@ -11,6 +11,13 @@
             background: url('your-background-image.jpg') no-repeat center center fixed;
             background-size: cover;
         }
+        /* Title styling */
+        h1 {
+            color: white;
+            font-size: 36px;
+            margin-top: 150px; /* Memberi jarak dari atas */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
         /* Menu bar positioning */
         #menu-bar {
             background-color: rgba(255, 255, 255, 0.8);
@@ -18,8 +25,8 @@
             display: flex;
             justify-content: center;
             position: relative;
-            top: 100px; /* Memindahkan lebih ke bawah */
-            margin-bottom: 30px; /* Spasi antara menu dan konten */
+            top: 150px; /* Memindahkan lebih ke bawah */
+            margin-bottom: 50px; /* Spasi antara menu dan konten */
         }
         #menu-bar button {
             margin: 0 10px;
@@ -73,11 +80,11 @@
         .valid {
             color: green;
         }
+        /* Quote at the bottom of the page */
         .quote {
             margin-top: 50px;
             font-style: italic;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: black; /* Mengubah warna teks menjadi hitam */
             position: fixed;
             bottom: 20px;
             width: 100%;
@@ -86,6 +93,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Title at the top -->
+    <h1>Scientific Number Checker</h1>
 
     <!-- Menu bar di tengah halaman -->
     <div id="menu-bar">
