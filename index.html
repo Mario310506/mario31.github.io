@@ -3,133 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific Number Checker</title>
+    <title>Scientific Number</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: url('your-background-image.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        #container {
-            padding: 50px;
-            margin-top: 100px;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: rgba(100, 100, 100, 0.8);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: rgba(150, 150, 150, 0.8);
-        }
-        #editMenu {
-            display: none;
-            margin-top: 10px;
-        }
-        input {
-            padding: 15px;
-            font-size: 16px;
-            width: 300px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border: none;
-            box-shadow: 0px 0px 5px gray;
-        }
-        .quote {
-            margin-top: 50px;
-            font-style: italic;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
+        /* CSS untuk dropdown */
+        .dropdown {
+            position: relative;
             display: inline-block;
         }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
     </style>
 </head>
 <body>
-    <div id="container">
-        <h1>Scientific Number Checker</h1>
-        <button id="file">File</button>
-        <button id="edit">Edit</button>
-        <div id="editMenu">
-            <button id="copy">Copy</button>
-            <button id="paste">Paste</button>
-        </div>
-        <button id="run">Run</button>
-        <button id="aboutUs">About Us</button>
 
-        <!-- Input field to check if a number is scientific -->
-        <input type="text" id="inputField" placeholder="Enter a number">
-        <button id="check">Check</button>
-
-        <!-- Result display -->
-        <p id="result"></p>
-
-        <div class="quote">
-            <p>"The only way to do great work is to love what you do." - Steve Jobs</p>
+    <div class="dropdown">
+        <button>Edit</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="saveFile()">Save</a>
+            <a href="#" onclick="saveAsFile()">Save As</a>
         </div>
     </div>
 
+    <div>
+        <!-- Contoh input text -->
+        <textarea id="editor" rows="10" cols="50">Masukkan teks di sini...</textarea>
+    </div>
+
     <script>
-        // Toggle the edit menu
-        document.getElementById("edit").addEventListener("click", function() {
-            const editMenu = document.getElementById("editMenu");
-            editMenu.style.display = editMenu.style.display === "none" ? "block" : "none";
-        });
+        // Fungsi untuk menyimpan file dengan nama default
+        function saveFile() {
+            var textToSave = document.getElementById('editor').value;
+            var blob = new Blob([textToSave], { type: "text/plain;charset=utf-8" });
+            var link = document.createElement("a");
 
-        // Copy function
-        document.getElementById("copy").addEventListener("click", function() {
-            const inputField = document.getElementById("inputField");
-            inputField.select();
-            document.execCommand("copy");
-            alert("Copied to clipboard: " + inputField.value);
-        });
+            link.href = URL.createObjectURL(blob);
+            link.download = "saved_text.txt"; // Nama default file
+            link.click();
+        }
 
-        // Paste function
-        document.getElementById("paste").addEventListener("click", function() {
-            navigator.clipboard.readText().then(
-                clipText => document.getElementById("inputField").value = clipText
-            ).catch(err => {
-                console.log('Failed to read clipboard contents: ', err);
-            });
-        });
+        // Fungsi untuk menyimpan file dengan pilihan nama file (Save As)
+        function saveAsFile() {
+            var textToSave = document.getElementById('editor').value;
+            var fileName = prompt("Masukkan nama file:", "untitled.txt");
 
-        // Scientific number checking function
-        document.getElementById("check").addEventListener("click", function() {
-            const input = document.getElementById("inputField").value;
-            const resultDisplay = document.getElementById("result");
+            if (fileName != null) {
+                var blob = new Blob([textToSave], { type: "text/plain;charset=utf-8" });
+                var link = document.createElement("a");
 
-            // Regular expression to test for scientific notation
-            const scientificNotation = /^[+-]?\d+(\.\d+)?(e[+-]?\d+)?$/i;
-
-            if (scientificNotation.test(input)) {
-                resultDisplay.textContent = "The input is a valid scientific number!";
-            } else {
-                resultDisplay.textContent = "The input is NOT a scientific number.";
+                link.href = URL.createObjectURL(blob);
+                link.download = fileName; // Menggunakan nama yang diberikan oleh user
+                link.click();
             }
-        });
-
-        // About Us button
-        document.getElementById("aboutUs").addEventListener("click", function() {
-            alert("Mario Fransiskus Lomban, 231011060071");
-        });
+        }
     </script>
+
 </body>
 </html>
