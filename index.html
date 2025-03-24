@@ -12,17 +12,16 @@
             background-size: cover;
         }
         #container {
+            background-color: rgba(255, 255, 255, 0.7); /* Transparansi */
             padding: 50px;
             margin-top: 100px;
+            border-radius: 10px;
+            display: inline-block;
         }
         button {
             margin: 10px;
             padding: 10px 20px;
             font-size: 16px;
-        }
-        #editMenu {
-            display: none;
-            margin-top: 10px;
         }
         input {
             padding: 10px;
@@ -30,9 +29,21 @@
             width: 300px;
             margin-top: 20px;
         }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .valid {
+            color: green;
+        }
         .quote {
             margin-top: 50px;
             font-style: italic;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .dropdown-content {
             display: none;
@@ -69,13 +80,6 @@
             </div>
         </div>
 
-        <!-- Edit menu without Save and Save As -->
-        <button id="edit">Edit</button>
-        <div id="editMenu">
-            <a href="#" id="copy">Copy</a>
-            <a href="#" id="paste">Paste</a>
-        </div>
-
         <button id="run">Run</button>
         <button id="aboutUs">About Us</button>
 
@@ -87,34 +91,11 @@
         <p id="result"></p>
 
         <div class="quote">
-            <p>"Believe you can and you're halfway there." - Theodore Roosevelt</p>
+            <p>"Without vertices, an automaton has no foundation; without edges, it has no movement. - Benny Pinontoan"</p>
         </div>
     </div>
 
     <script>
-        // Toggle the edit menu
-        document.getElementById("edit").addEventListener("click", function() {
-            const editMenu = document.getElementById("editMenu");
-            editMenu.style.display = editMenu.style.display === "none" ? "block" : "none";
-        });
-
-        // Copy function
-        document.getElementById("copy").addEventListener("click", function() {
-            const inputField = document.getElementById("inputField");
-            inputField.select();
-            document.execCommand("copy");
-            alert("Copied to clipboard: " + inputField.value);
-        });
-
-        // Paste function
-        document.getElementById("paste").addEventListener("click", function() {
-            navigator.clipboard.readText().then(
-                clipText => document.getElementById("inputField").value = clipText
-            ).catch(err => {
-                console.log('Failed to read clipboard contents: ', err);
-            });
-        });
-
         // Scientific number checking function
         document.getElementById("check").addEventListener("click", function() {
             const input = document.getElementById("inputField").value;
@@ -124,9 +105,13 @@
             const scientificNotation = /^[+-]?\d+(\.\d+)?(e[+-]?\d+)?$/i;
 
             if (scientificNotation.test(input)) {
-                resultDisplay.textContent = "The input is a valid scientific number!";
+                resultDisplay.textContent = "Yes, it is a scientific number!";
+                resultDisplay.classList.remove("error");
+                resultDisplay.classList.add("valid");
             } else {
-                resultDisplay.textContent = "The input is NOT a scientific number.";
+                resultDisplay.textContent = "No, it is not a number";
+                resultDisplay.classList.remove("valid");
+                resultDisplay.classList.add("error");
             }
         });
 
