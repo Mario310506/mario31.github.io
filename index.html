@@ -11,22 +11,20 @@
             background: url('your-background-image.jpg') no-repeat center center fixed;
             background-size: cover;
         }
-        /* Title styling */
         h1 {
-            color: black; /* Ubah warna judul menjadi hitam */
+            color: black;
             font-size: 36px;
-            margin-top: 150px; /* Memberi jarak dari atas */
+            margin-top: 120px; /* Memastikan jarak dari atas tidak terlalu jauh */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        /* Menu bar positioning */
         #menu-bar {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             display: flex;
             justify-content: center;
             position: relative;
-            top: 170px; /* Memindahkan lebih ke bawah setelah judul */
-            margin-bottom: 50px; /* Spasi antara menu dan konten */
+            top: 20px; /* Mengurangi jarak dari atas */
+            margin-bottom: 40px;
         }
         #menu-bar button {
             margin: 0 10px;
@@ -53,11 +51,10 @@
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
-        /* Container for input */
         #container {
             background-color: rgba(255, 255, 255, 0.7);
-            padding: 50px;
-            margin-top: 50px;
+            padding: 30px;
+            margin-top: 30px; /* Jarak dari menu bar */
             border-radius: 10px;
             display: inline-block;
         }
@@ -80,11 +77,11 @@
         .valid {
             color: green;
         }
-        /* Quote at the bottom of the page */
+        /* Styling kutipan di bagian bawah */
         .quote {
             margin-top: 50px;
             font-style: italic;
-            color: black; /* Mengubah warna teks menjadi hitam */
+            color: black;
             position: fixed;
             bottom: 20px;
             width: 100%;
@@ -94,10 +91,10 @@
 </head>
 <body>
 
-    <!-- Title at the top -->
+    <!-- Judul di bagian atas -->
     <h1>Scientific Number Checker</h1>
 
-    <!-- Menu bar di tengah halaman -->
+    <!-- Menu bar di bagian tengah halaman -->
     <div id="menu-bar">
         <div class="dropdown">
             <button id="file">File</button>
@@ -120,7 +117,7 @@
         <button id="aboutUs">About Us</button>
     </div>
 
-    <!-- Input field untuk nomor scientific -->
+    <!-- Input field dan tombol check di bawah menu bar -->
     <div id="container">
         <input type="text" id="inputField" placeholder="Enter a number">
         <button id="check">Check</button>
@@ -131,7 +128,7 @@
 
     <!-- Teks kutipan di bagian bawah halaman -->
     <div class="quote">
-        <p>"Without vertices, an automaton has no foundation; without edges, it has no movement. - Benny Pinontoan"</p>
+        <p>"The only way to do great work is to love what you do. - Steve Jobs"</p>
     </div>
 
     <script>
