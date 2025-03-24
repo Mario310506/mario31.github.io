@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scientific Number Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .card {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card input {
+            width: 200px;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .card button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #218838;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 14px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#" id="file">File</a>
+        <a href="#" id="edit">Edit</a>
+        <a href="#" id="run">Run</a>
+        <a href="#" id="about">About Us</a>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h2>Enter a number</h2>
+            <input type="text" id="inputNumber" placeholder="Enter a number">
+            <button onclick="checkNumber()">Check</button>
+            <p id="result"></p>
+        </div>
+    </div>
+    <footer>
+        <p>The only way to do great work is to love what you do. - Steve Jobs</p>
+    </footer>
+    <script>
+        function checkNumber() {
+            const input = document.getElementById('inputNumber').value;
+            const scientificNumberPattern = /^[+-]?(\d+\.?\d*|\.?\d+)([eE][+-]?\d+)?$/;
+            const result = scientificNumberPattern.test(input);
+            document.getElementById('result').innerText = result ? 'Valid scientific number' : 'Invalid scientific number';
+        }
+
+        document.getElementById('file').onclick = function() {
+            alert('File: Save functionality coming soon!');
+        };
+
+        document.getElementById('edit').onclick = function() {
+            alert('Edit: Copy and paste functionality coming soon!');
+        };
+
+        document.getElementById('run').onclick = function() {
+            checkNumber();
+        };
+
+        document.getElementById('about').onclick = function() {
+            alert('About Us: Mario Fransiskus Lomban 231011060071');
+        };
+    </script>
+</body>
+</html>
