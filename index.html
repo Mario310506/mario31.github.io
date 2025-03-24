@@ -3,118 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Scientific Number Checker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: url('background.jpg') no-repeat center center fixed;
+            text-align: center;
+            background: url('your-background-image.jpg') no-repeat center center fixed;
             background-size: cover;
         }
-        .card {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        #container {
+            padding: 50px;
+            margin-top: 100px;
         }
-        .card input {
-            width: 200px;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-        }
-        .card button {
+        button {
+            margin: 10px;
             padding: 10px 20px;
-            background-color: #28a745;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
+            font-size: 16px;
         }
-        .card button:hover {
-            background-color: #218838;
+        #editMenu {
+            display: none;
+            margin-top: 10px;
         }
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #333;
-            padding: 14px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-top: 20px;
         }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 14px 20px;
-        }
-        .navbar a:hover {
-            background-color: #575757;
-        }
-        footer {
-            position: fixed;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
+        .quote {
+            margin-top: 50px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="#" id="file">File</a>
-        <a href="#" id="edit">Edit</a>
-        <a href="#" id="run">Run</a>
-        <a href="#" id="about">About Us</a>
-    </div>
-    <div class="container">
-        <div class="card">
-            <h2>Enter a number</h2>
-            <input type="text" id="inputNumber" placeholder="Enter a number">
-            <button onclick="checkNumber()">Check</button>
-            <p id="result"></p>
+    <div id="container">
+        <h1>Scientific Number Checker</h1>
+        <button id="file">File</button>
+        <button id="edit">Edit</button>
+        <div id="editMenu">
+            <button id="copy">Copy</button>
+            <button id="paste">Paste</button>
+        </div>
+        <button id="run">Run</button>
+        <button id="aboutUs">About Us</button>
+
+        <!-- Input field to check if a number is scientific -->
+        <input type="text" id="inputField" placeholder="Enter a number">
+        <button id="check">Check</button>
+
+        <!-- Result display -->
+        <p id="result"></p>
+
+        <div class="quote">
+            <p>"Believe you can and you're halfway there." - Theodore Roosevelt</p>
         </div>
     </div>
-    <footer>
-        <p>The only way to do great work is to love what you do. - Steve Jobs</p>
-    </footer>
+
     <script>
-        function checkNumber() {
-            const input = document.getElementById('inputNumber').value;
-            const scientificNumberPattern = /^[+-]?(\d+\.?\d*|\.?\d+)([eE][+-]?\d+)?$/;
-            const result = scientificNumberPattern.test(input);
-            document.getElementById('result').innerText = result ? 'Valid scientific number' : 'Invalid scientific number';
-        }
+        // Toggle the edit menu
+        document.getElementById("edit").addEventListener("click", function() {
+            const editMenu = document.getElementById("editMenu");
+            editMenu.style.display = editMenu.style.display === "none" ? "block" : "none";
+        });
 
-        document.getElementById('file').onclick = function() {
-            alert('File: Save functionality coming soon!');
-        };
+        // Copy function
+        document.getElementById("copy").addEventListener("click", function() {
+            const inputField = document.getElementById("inputField");
+            inputField.select();
+            document.execCommand("copy");
+            alert("Copied to clipboard: " + inputField.value);
+        });
 
-        document.getElementById('edit').onclick = function() {
-            alert('Edit: Copy and paste functionality coming soon!');
-        };
+        // Paste function
+        document.getElementById("paste").addEventListener("click", function() {
+            navigator.clipboard.readText().then(
+                clipText => document.getElementById("inputField").value = clipText
+            ).catch(err => {
+                console.log('Failed to read clipboard contents: ', err);
+            });
+        });
 
-        document.getElementById('run').onclick = function() {
-            checkNumber();
-        };
+        // Scientific number checking function
+        document.getElementById("check").addEventListener("click", function() {
+            const input = document.getElementById("inputField").value;
+            const resultDisplay = document.getElementById("result");
 
-        document.getElementById('about').onclick = function() {
-            alert('About Us: Mario Fransiskus Lomban 231011060071');
-        };
+            // Regular expression to test for scientific notation
+            const scientificNotation = /^[+-]?\d+(\.\d+)?(e[+-]?\d+)?$/i;
+
+            if (scientificNotation.test(input)) {
+                resultDisplay.textContent = "The input is a valid scientific number!";
+            } else {
+                resultDisplay.textContent = "The input is NOT a scientific number.";
+            }
+        });
+
+        // About Us button
+        document.getElementById("aboutUs").addEventListener("click", function() {
+            alert("Mario Fransiskus Lomban, 231011060071");
+        });
     </script>
 </body>
 </html>
