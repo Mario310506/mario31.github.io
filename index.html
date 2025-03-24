@@ -11,18 +11,16 @@
             background: url('your-background-image.jpg') no-repeat center center fixed;
             background-size: cover;
         }
-        /* Styling untuk container menu di atas */
+        /* Menu bar positioning */
         #menu-bar {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             display: flex;
             justify-content: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            position: relative;
+            top: 100px; /* Memindahkan lebih ke bawah */
+            margin-bottom: 30px; /* Spasi antara menu dan konten */
         }
-        /* Styling button di menu */
         #menu-bar button {
             margin: 0 10px;
             padding: 10px 20px;
@@ -48,11 +46,11 @@
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
-        /* Container di bawah untuk input dan output */
+        /* Container for input */
         #container {
-            background-color: rgba(255, 255, 255, 0.7); /* Transparansi */
+            background-color: rgba(255, 255, 255, 0.7);
             padding: 50px;
-            margin-top: 150px;
+            margin-top: 50px;
             border-radius: 10px;
             display: inline-block;
         }
@@ -61,7 +59,7 @@
             font-size: 16px;
             width: 300px;
         }
-        #check {
+        #check, #run {
             padding: 10px 20px;
             font-size: 16px;
         }
@@ -80,12 +78,16 @@
             font-style: italic;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- Menu bar di bagian atas -->
+    <!-- Menu bar di tengah halaman -->
     <div id="menu-bar">
         <div class="dropdown">
             <button id="file">File</button>
@@ -108,23 +110,42 @@
         <button id="aboutUs">About Us</button>
     </div>
 
-    <!-- Container di bawah -->
+    <!-- Input field untuk nomor scientific -->
     <div id="container">
-        <!-- Input field untuk nomor scientific -->
         <input type="text" id="inputField" placeholder="Enter a number">
         <button id="check">Check</button>
 
         <!-- Display hasil validasi -->
         <p id="result"></p>
+    </div>
 
-        <div class="quote">
-            <p>"Without vertices, an automaton has no foundation; without edges, it has no movement. - Benny Pinontoan"</p>
-        </div>
+    <!-- Teks kutipan di bagian bawah halaman -->
+    <div class="quote">
+        <p>"Without vertices, an automaton has no foundation; without edges, it has no movement. - Benny Pinontoan"</p>
     </div>
 
     <script>
         // Scientific number checking function
         document.getElementById("check").addEventListener("click", function() {
+            const input = document.getElementById("inputField").value;
+            const resultDisplay = document.getElementById("result");
+
+            // Regular expression to test for scientific notation
+            const scientificNotation = /^[+-]?\d+(\.\d+)?(e[+-]?\d+)?$/i;
+
+            if (scientificNotation.test(input)) {
+                resultDisplay.textContent = "Yes, it is a scientific number!";
+                resultDisplay.classList.remove("error");
+                resultDisplay.classList.add("valid");
+            } else {
+                resultDisplay.textContent = "No, it is not a number";
+                resultDisplay.classList.remove("valid");
+                resultDisplay.classList.add("error");
+            }
+        });
+
+        // Run button functionality - same as "Check"
+        document.getElementById("run").addEventListener("click", function() {
             const input = document.getElementById("inputField").value;
             const resultDisplay = document.getElementById("result");
 
