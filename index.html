@@ -11,39 +11,22 @@
             background: url('your-background-image.jpg') no-repeat center center fixed;
             background-size: cover;
         }
-        #container {
-            background-color: rgba(255, 255, 255, 0.7); /* Transparansi */
-            padding: 50px;
-            margin-top: 100px;
-            border-radius: 10px;
-            display: inline-block;
+        /* Styling untuk container menu di atas */
+        #menu-bar {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
-        button {
-            margin: 10px;
+        /* Styling button di menu */
+        #menu-bar button {
+            margin: 0 10px;
             padding: 10px 20px;
             font-size: 16px;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            width: 300px;
-            margin-top: 20px;
-        }
-        #result {
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        .error {
-            color: red;
-        }
-        .valid {
-            color: green;
-        }
-        .quote {
-            margin-top: 50px;
-            font-style: italic;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .dropdown-content {
             display: none;
@@ -65,13 +48,45 @@
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
+        /* Container di bawah untuk input dan output */
+        #container {
+            background-color: rgba(255, 255, 255, 0.7); /* Transparansi */
+            padding: 50px;
+            margin-top: 150px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        #check {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .valid {
+            color: green;
+        }
+        .quote {
+            margin-top: 50px;
+            font-style: italic;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h1>Scientific Number Checker</h1>
 
-        <!-- Dropdown for File Menu -->
+    <!-- Menu bar di bagian atas -->
+    <div id="menu-bar">
         <div class="dropdown">
             <button id="file">File</button>
             <div class="dropdown-content">
@@ -80,14 +95,26 @@
             </div>
         </div>
 
+        <!-- Edit menu dengan copy paste -->
+        <div class="dropdown">
+            <button id="edit">Edit</button>
+            <div class="dropdown-content">
+                <a href="#" id="copy">Copy</a>
+                <a href="#" id="paste">Paste</a>
+            </div>
+        </div>
+
         <button id="run">Run</button>
         <button id="aboutUs">About Us</button>
+    </div>
 
-        <!-- Input field to check if a number is scientific -->
+    <!-- Container di bawah -->
+    <div id="container">
+        <!-- Input field untuk nomor scientific -->
         <input type="text" id="inputField" placeholder="Enter a number">
         <button id="check">Check</button>
 
-        <!-- Result display -->
+        <!-- Display hasil validasi -->
         <p id="result"></p>
 
         <div class="quote">
@@ -140,6 +167,23 @@
                 link.click();
             }
         }
+
+        // Copy function
+        document.getElementById("copy").addEventListener("click", function() {
+            const inputField = document.getElementById("inputField");
+            inputField.select();
+            document.execCommand("copy");
+            alert("Copied to clipboard: " + inputField.value);
+        });
+
+        // Paste function
+        document.getElementById("paste").addEventListener("click", function() {
+            navigator.clipboard.readText().then(
+                clipText => document.getElementById("inputField").value = clipText
+            ).catch(err => {
+                console.log('Failed to read clipboard contents: ', err);
+            });
+        });
 
         // About Us button
         document.getElementById("aboutUs").addEventListener("click", function() {
